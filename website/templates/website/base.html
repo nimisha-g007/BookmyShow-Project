@@ -1,0 +1,217 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}CineBook{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="top-header">
+    <div class="header-inner">
+
+        <!-- TEXT-BASED BOOKMYSHOW LOGO -->
+        <a class="brand" href="{% url 'home' %}">
+            book<span class="logo-my">my</span>show
+        </a>
+
+        <form class="search-form" action="{% url 'movies' %}" method="get">
+            <span>⌕</span>
+            <input type="search"
+                   name="search"
+                   placeholder="Search for Movies, Events, Plays and Activities">
+        </form>
+
+        <div class="header-actions">
+
+            <span class="city-label">Delhi-NCR⌄</span>
+
+            {% if user.is_authenticated %}
+                <span class="welcome-user">Hi, {{ user.username }}</span>
+                <a class="sign-in" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="sign-in" href="{% url 'login' %}">Sign in</a>
+            {% endif %}
+
+        </div>
+    </div>
+</header>
+
+
+<!-- NAVIGATION -->
+<nav class="sub-nav">
+    <div class="nav-inner">
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'movies' %}">Movies</a>
+            <a href="{% url 'home' %}#premieres">Streams</a>
+            <a href="{% url 'events' %}">Events</a>
+        </div>
+
+        <div class="nav-links right-links">
+            <a href="{% url 'about' %}">About</a>
+
+            {% if not user.is_authenticated %}
+                <a href="{% url 'signup' %}">Sign Up</a>
+            {% endif %}
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- MESSAGES -->
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <p class="message {{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<!-- MAIN CONTENT -->
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="footer-inner">
+
+        <!-- FOOTER INTRO -->
+        <div class="footer-intro">
+
+            <a class="brand footer-brand" href="{% url 'home' %}">
+                book<span class="logo-my">my</span>show
+            </a>
+
+            <p>Your one-stop destination for movies and live experiences.</p>
+
+        </div>
+
+
+        <!-- EXPLORE -->
+        <div class="footer-section">
+
+            <h4>EXPLORE CINEBOOK</h4>
+
+            <div class="footer-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'movies' %}">Movies</a>
+                <a href="{% url 'events' %}">Events</a>
+                <a href="{% url 'about' %}">About Us</a>
+            </div>
+
+        </div>
+
+
+        <!-- MOVIE GENRES -->
+        <div class="footer-section">
+
+            <h4>POPULAR MOVIE GENRES</h4>
+
+            <div class="footer-links">
+                <a href="{% url 'movies' %}?search=Action">Action</a>
+                <a href="{% url 'movies' %}?search=Comedy">Comedy</a>
+                <a href="{% url 'movies' %}?search=Drama">Drama</a>
+                <a href="{% url 'movies' %}?search=Romance">Romance</a>
+                <a href="{% url 'movies' %}?search=Thriller">Thriller</a>
+                <a href="{% url 'movies' %}?search=Horror">Horror</a>
+            </div>
+
+        </div>
+
+
+        <!-- EVENTS -->
+        <div class="footer-section">
+
+            <h4>POPULAR EVENTS</h4>
+
+            <div class="footer-links">
+                <a href="{% url 'events' %}?search=Comedy">Comedy Shows</a>
+                <a href="{% url 'events' %}?search=Theatre">Theatre</a>
+                <a href="{% url 'events' %}?search=Music">Music Events</a>
+                <a href="{% url 'events' %}?search=Workshops">Workshops</a>
+                <a href="{% url 'events' %}?search=Amusement%20Park">Amusement Parks</a>
+            </div>
+
+        </div>
+
+
+        <!-- CITIES -->
+        <div class="footer-section">
+
+            <h4>POPULAR CITIES</h4>
+
+            <div class="footer-links">
+                <a href="{% url 'events' %}?search=Delhi">Delhi</a>
+                <a href="{% url 'events' %}?search=Gurgaon">Gurgaon</a>
+                <a href="{% url 'events' %}?search=Noida">Noida</a>
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+        <div class="footer-section">
+
+            <h4>ACCOUNT & SUPPORT</h4>
+
+            <div class="footer-links">
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                {% endif %}
+
+                <a href="{% url 'about' %}">Contact / About</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+
+        <div class="footer-logo-line"></div>
+
+        <!-- TEXT-BASED FOOTER LOGO -->
+        <a class="brand footer-brand bottom-brand" href="{% url 'home' %}">
+            book<span class="logo-my">my</span>show
+        </a>
+
+        <div class="social-links">
+            <span>f</span>
+            <span>𝕏</span>
+            <span>◎</span>
+            <span>▶</span>
+        </div>
+
+        <p class="copyright">
+            © 2026 CineBook Student Project. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

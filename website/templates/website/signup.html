@@ -1,0 +1,19 @@
+{% extends 'website/base.html' %}
+{% block title %}Sign Up | CineBook{% endblock %}
+{% block content %}
+<section class="auth-wrap">
+    <div class="auth-card">
+        <p class="eyebrow pink">JOIN CINEBOOK</p>
+        <h1>Create account</h1>
+        <p class="auth-subtitle">Sign up to explore movies and events.</p>
+        <form method="post">{% csrf_token %}<label>Username</label>
+            <input type="text" name="username" required>
+            <label>Email</label><input type="email" name="email" required><label>Password</label>
+            <input type="password" name="password" required><label>Confirm password</label>
+            <input type="password" name="confirm_password" required>
+            <button class="primary-button full-button" type="submit">Create account</button>
+        </form><p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Sign in</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
