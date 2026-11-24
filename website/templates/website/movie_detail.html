@@ -1,3 +1,20 @@
 {% extends 'website/base.html' %}
-{% block title %}{{ movie.title }} | CineBook{% endblock %}
-{% block content %}<section class="detail-layout"><div class="detail-poster">{% if movie.poster_url %}<img src="{{ movie.poster_url }}" alt="{{ movie.title }}">{% else %}<div class="poster-fallback">{{ movie.title }}</div>{% endif %}</div><div class="detail-copy"><p class="eyebrow pink">MOVIE DETAILS</p><h1>{{ movie.title }}</h1><p>{{ movie.genre }} · {{ movie.language }} · {{ movie.duration }} minutes</p><p>Release date: {{ movie.release_date }}</p><p class="detail-rating">★ {{ movie.rating }}/10</p><p>{{ movie.description }}</p><a class="primary-button" href="{% url 'movies' %}">Back to Movies</a></div></section>{% endblock %}
+{% block title %}{{ movie.title }} | BookMyShow
+{% endblock %}
+{% block content %}
+<section class="detail-layout">
+    <div class="detail-poster">{% if movie.poster_url %}
+        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+        {% else %}
+        <div class="poster-fallback">{{ movie.title }}</div>
+        {% endif %}</div><div class="detail-copy">
+            <p class="eyebrow pink">MOVIE DETAILS</p>
+            <h1>{{ movie.title }}</h1>
+            <p>{{ movie.genre }} · {{ movie.language }} · {{ movie.duration }} minutes</p>
+            <p>Release date: {{ movie.release_date }}</p>
+            <p class="detail-rating">★ {{ movie.rating }}/10</p>
+            <p>{{ movie.description }}</p>
+            <a class="primary-button" href="{% url 'movies' %}">Back to Movies</a>
+        </div>
+    </section>
+    {% endblock %}
